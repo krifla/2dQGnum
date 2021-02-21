@@ -20,7 +20,7 @@
 # -----------------------------------------------------------------------------
 
 ### what kind of diabatic heating?
-heating1	= True		# latent heating			                    Mak1994
+heating1	= False		# latent heating			                    Mak1994
 heating1_ice= False		# latent heating at ice cloud stage	            Flacké
 evap		= False		# latent cooling below heating layer    	    Flacké
 heating2	= False		# sensible surface fluxes		                Mak1998
@@ -35,7 +35,7 @@ h2pro	= False			# Mak1998
 
 # heating parameters
 if heating1 == True:
-    epsilon1 = np.array([0,1.5,2.,2.5])### 3 for tropopause experiments
+    epsilon1 = np.array([0,1.5,2,2.5])### 3 for tropopause experiments
 if heating1 == False:
     epsilon1 = np.array([0])
 eps1_index = 0
@@ -103,14 +103,8 @@ beta = 0#1.6			    # 1.6*10^-11 at 44 deg, 1.0*10^-11 at 63 deg
 # -----------------------------------------------------------------------------
 
 ### wavelength and wavenumber
-wl	= np.logspace(-1.*np.log(2),-.2*np.log(2),12)
-wl	= np.append(wl,np.logspace(-.1*np.log(2),np.log(.99),30))
-wl	= np.append(wl,np.logspace(np.log(1),np.log(2),40))
-wl	= np.append(wl,np.logspace(np.log(2.05),np.log(6),50))
-##wl	= np.append(wl,np.logspace(np.log(3.1),np.log(6),5))
 wl	= np.logspace(np.log(1.),np.log(2.),150)
 wl	= np.append(wl,np.logspace(np.log(2.05),np.log(4),50))
-#wl	= np.logspace(np.log(1.2),np.log(1.6),100)
 k	= 2.*np.pi/wl
 
 ### pressure levels and resolution
@@ -127,7 +121,7 @@ ptdl	= .89		# pressure @ top of drag layer			    Flacké
 pt	    = .0###		# pressure @ top of domain			        Mak1994: 0.15 or Mak1998: 0
 ptrop	= .25 		# pressure @ tropopause				        Flacké
 
-nrws	= 201#int((1-.25)*2*85)+1#2*85+1			# vertical resolution (number of grid points)
+nrws	= 201   			# vertical resolution (number of grid points)
 dp	    = (pt-ps)/(nrws-1)	# vertical resolution (constant increment)
 					        # NOTE: be careful with derivatives when defining dp negative
 p	= np.linspace(pt, ps, nrws)	# pressure vector
@@ -191,7 +185,7 @@ S[jtbl] = (S1+S2)/2
    
 if stratos == True:
     for j in range(jtrop):
-        S[j] = 4*S1#3.389830508474576*S1#4*S1
+        S[j] = 4*S1#3.389830508474576*S1
     S[jtrop] = (S[jtrop-1]+S[jtrop+1])/2
     #S[jtrop-10:jtrop] = 3
     #S[jtrop:jtrop+11] = 1.25
@@ -241,7 +235,7 @@ lamstrat_steps = True
 three_steps = False
 five_steps = False
 
-lambda1	= np.ones(nrws)*3.5#5.5#####################		# zonal wind shear			Mak1994
+lambda1	= np.ones(nrws)*3.5		# zonal wind shear			Mak1994
 #lambda1 = np.ones(nrws)*5		# zonal wind shear			Mak1998
 
 u = np.zeros(nrws)
@@ -254,7 +248,7 @@ for j in range(nrws):
 
 if stratos == True:			# wind shear in stratosphere		Flacké
     for j in range(jtrop):
-        lambda1[j] = -3.5#2.0762711864406773#5.5###
+        lambda1[j] = -3.5#2.0762711864406773
     lambda1[jtrop] = (lambda1[jtrop-1]+lambda1[jtrop+1])/2
     
     u[jtrop] = lambda1[jtrop+1]*(ps-ptrop) # to make sure that the averaging of the discontinuous lambda at the tropopause doesn't mess up the zonal wind
@@ -361,7 +355,7 @@ def smooth(S, N):         # smooth tropopause N times     Vicky
 
 def smooth_sine(lamstrat):
     global ptrop_range, sm_scale, noncons
-    ptrop_range = 15 #default 10, *15* or 20 depending on vertical resolution
+    ptrop_range = 10 #default 10, *15* or 20 depending on vertical resolution
     amp = lambda1[-1]/S[-1]
     noncons = False
     if noncons == False:
@@ -991,6 +985,111 @@ def check_wind_and_heating():
 
     plt.show()
 
+# -----------------------------------------------------------------------------
 
+def show_vertical_profiles():
+
+    global lamstrat_vec, dqdy_vec, lambda_vec, S_vec
+    
+    try:
+        lamstrat_vec
+    except:
+        lamstrat_vec = np.zeros((5,nrws))
+        dqdy_vec = np.zeros((5,nrws))
+        lambda_vec = np.zeros((5,nrws))
+        S_vec = np.zeros((5,nrws))
+
+    if stratos == True and smoothshearstrat == False:
+        lamstrat_vec[0]=lamstrat[:nrws]
+        dqdy_vec[0]=dqdy
+        lambda_vec[0]=lambda1_disc[:nrws]
+        S_vec[0]=S_disc[:nrws]
+    if stratos == True and smoothshearstrat == True and ptrop_range == 15 and ptrop < .26 and noncons == False:
+        lamstrat_vec[1]=lamstrat
+        dqdy_vec[1]=dqdy
+        lambda_vec[1]=lambda1[:nrws]
+        S_vec[1]=S[:nrws]
+    if stratos == True and smoothshearstrat == True and ptrop_range == 10 and ptrop < .26 and noncons == False:
+        lamstrat_vec[2]=lamstrat
+        dqdy_vec[2]=dqdy
+        lambda_vec[2]=lambda1[:nrws]
+        S_vec[2]=S[:nrws]
+    if stratos == True and smoothshearstrat == True and ptrop_range == 15 and ptrop > .29 and noncons == False:
+        lamstrat_vec[3]=lamstrat
+        dqdy_vec[3]=dqdy
+        lambda_vec[3]=lambda1[:nrws]
+        S_vec[3]=S[:nrws]
+    if stratos == True and smoothshearstrat == True and ptrop_range == 15 and ptrop < .26 and noncons == True:
+        lamstrat_vec[4]=lamstrat
+        dqdy_vec[4]=dqdy
+        lambda_vec[4]=lambda1[:nrws]
+        S_vec[4]=S[:nrws]
+
+
+    mpl.rc('font',size=18)
+    fig, (ax3,ax4,ax1,ax2) = plt.subplots(1,4,figsize=(16,5),dpi=300)
+    plt.subplots_adjust(wspace=.05)
+    #ax1 = ax.twiny()
+
+    #ax1.axvline(0,c='k',ls='--',lw=1)
+    ax1.plot(lamstrat_vec[0,:nrws],p[:nrws],c=c_greys[0],ls='-',lw=2)
+    ax2.plot(-dqdy_vec[0,1:nrws-1]/dqdy_disc[-1],p[1:nrws-1],c=c_greys[0],ls='-',lw=2) 
+    ax3.plot(lambda_vec[0],p[:nrws],c=c_greys[0],ls='-',lw=2)
+    ax4.plot(S_vec[0],p[:nrws],c=c_greys[0],ls='-',lw=2) 
+    ax1.plot(lamstrat_vec[1,:nrws],p[:nrws],c='k',ls='-',lw=2)
+    ax2.plot(-dqdy_vec[1,1:nrws-1]/dqdy_disc[-1],p[1:nrws-1],c='k',lw=2)
+    ax3.plot(lambda_vec[1],p[:nrws],c='k',ls='-',lw=2)
+    ax4.plot(S_vec[1],p[:nrws],c='k',ls='-',lw=2)  
+    ax1.plot(lamstrat_vec[2,:nrws],p[:nrws],c=c_reds[1],ls='-',lw=2)
+    ax2.plot(-dqdy_vec[2,1:nrws-1]/dqdy_disc[-1],p[1:nrws-1],c=c_reds[1],lw=2) 
+    ax3.plot(lambda_vec[2],p[:nrws],c=c_reds[1],ls='-',lw=2)
+    ax4.plot(S_vec[2],p[:nrws],c=c_reds[1],ls='-',lw=2)
+    ax1.plot(lamstrat_vec[3,:nrws],p[:nrws],c=c_blues[1],ls='-',lw=2)
+    ax2.plot(-dqdy_vec[3,1:nrws-1]/dqdy_disc[-1],p[1:nrws-1],c=c_blues[1],lw=2) 
+    ax3.plot(lambda_vec[3],p[:nrws],c=c_blues[1],ls='-',lw=2)
+    ax4.plot(S_vec[3],p[:nrws],c=c_blues[1],ls='-',lw=2) 
+    ax1.plot(lamstrat_vec[4,:nrws],p[:nrws],c='y',ls='--',lw=2)
+    ax2.plot(-dqdy_vec[4,1:nrws-1]/dqdy_disc[-1],p[1:nrws-1],c='y',ls='--',lw=2)
+    ax3.plot(lambda_vec[4],p[:nrws],c='y',ls='--',lw=2)
+    ax4.plot(S_vec[4],p[:nrws],c='y',ls='--',lw=2)  
+
+    ax4.plot((),(),c=c_greys[0],lw=2,label='sharp CTL')
+    ax4.plot((),(),c='k',lw=2,label='smooth CTL')
+    ax4.plot((),(),c=c_reds[1],lw=2,label='smooth shallow')
+    ax4.plot((),(),c=c_blues[1],lw=2,label='smooth low')
+    ax4.plot((),(),c='y',lw=2,ls='--',label='smooth NCONS-70')
+
+    ax1.set_xlabel('$\\regular{\lambda/S}$ \n$\\regular{(s \; hPa \; m^{-1})}$')
+    #ax1.set_xlim(-1.1*np.max(lamstrat),1.1*np.max(lamstrat))
+    ax2.set_xlabel('$\\regular{-[d\overline{q}/dy] \; / \; [d\overline{q}/dy]_{surf}}$')#'$\\regular{d\overline{q}/dy}$')
+    ax2.set_xlim(-.1,1.3)#np.max(np.abs(dqdy_weaksmooth)),np.max(np.abs(dqdy_weaksmooth)))
+    ax2.set_xticks([0,.5,1])
+    ax3.set_xlabel('$\\regular{\lambda}$ \n$\\regular{(\\times 10^{-2} \; m \; s^{-1} \; hPa^{-1})}$')
+    ax4.set_xlabel('$\\regular{S}$ \n$\\regular{(\\times 10^{-2} \; m^2 \; s^{-2} \; hPa^{-2})}$')
+    ax1.set_yticks([0,.2,.25,.3,.5,1])
+    ax1.set_yticklabels([])
+    ax1.set_ylim(0,.5)#1)
+    ax1.invert_yaxis()
+    ax2.set_yticks([0,.2,.25,.3,.5,1])
+    ax2.set_yticklabels([])
+    ax2.set_ylim(0,.5)#1)
+    ax2.invert_yaxis()
+    ax3.set_yticks([0,.2,.25,.3,.5,1])
+    ax3.set_yticklabels([0,200,250,300,500,1000])
+    ax3.set_ylim(0,.5)#1)
+    ax3.invert_yaxis()
+    ax3.set_ylabel('pressure (hPa)')
+    ax4.set_yticks([0,.2,.25,.3,.5,1])
+    ax4.set_yticklabels([])
+    ax4.set_ylim(0,.5)#1)
+    ax4.invert_yaxis()
+    ax3.text(lambda_vec[0,jtrop],-0.01,'(a)',horizontalalignment='center',verticalalignment='bottom',fontsize=20)
+    ax4.text(S_vec[0,jtrop],-0.01,'(b)',horizontalalignment='center',verticalalignment='bottom',fontsize=20)
+    ax1.text(lamstrat_vec[1,jtrop],-0.01,'(c)',horizontalalignment='center',verticalalignment='bottom',fontsize=20)
+    ax2.text(1.2/2,-0.01,'(d)',horizontalalignment='center',verticalalignment='bottom',fontsize=20)
+
+    ax4.legend(ncol=5,bbox_to_anchor=(1.02, -.4),loc='center',fontsize=17.5, handletextpad=.5, columnspacing=1)
+
+    plt.savefig(f'/home/kfl078/Downloads/smoothprofiles.pdf', transparent=True, bbox_inches='tight', pad_inches=0.1)
 
 

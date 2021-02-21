@@ -12,9 +12,6 @@ def check_growthrates():
     global sigmai_sorted_5, sigmai_sorted_6, sigmai_sorted_7, sigmai_sorted_8
     global sigmai_sorted_9, sigmai_sorted_10, sigmai_sorted_11, sigmai_sorted_12, sigmai_sorted_13
     global lw, labels, colors, alphas, linestyles
-    global wl_old
-
-    wl_old = wl
 
 ### plotting the growth rate (and phase speed) ----------------------------
 
@@ -38,18 +35,19 @@ def check_growthrates():
     lw = 3
     lwfac = 1.5
 
-    labels = (['$\lambda_{st}/\lambda_{tr}= \hspace{1.2} 1$, $S_{st}/S_{tr}=4$','$\lambda_{st}/\lambda_{tr}=-1$, $S_{st}/S_{tr}=1$','$\lambda_{st}/\lambda_{tr}=-1$, $S_{st}/S_{tr}=4$','$\lambda_{st}/\lambda_{tr}=-2$, $S_{st}/S_{tr}=1$','$\lambda_{st}/\lambda_{tr}=-2$, $S_{st}/S_{tr}=4$','narrow range','narrow range noncons','wide range','wide range noncons','low trop','low trop noncons','high trop','high trop noncons','narrow high res','wide high res'])        
-    #labels = (['sharp','sharp NCONS-70','smooth/default','smooth/default NCONS-70','shallow (100 hPa)','shallow (100 hPa) NCONS-70','deep (200 hPa)','deep (200 hPa) NCONS-70','low (300 hPa)','low (300 hPa) NCONS-70','high (200 hPa)','high (200 hPa) NCONS-70','narrow high res','wide high res'])#$\\regular{p_{trop}}$ = 
+    labels = (['sharp CTL','sharp CTL-$\\regular{\lambda}$','sharp CTL-$\\regular{S}$', '$\lambda_{st}/\lambda_{tr}= \hspace{1.2} 1$, $S_{st}/S_{tr}=4$','$\lambda_{st}/\lambda_{tr}=-1$, $S_{st}/S_{tr}=1$','$\lambda_{st}/\lambda_{tr}=-1$, $S_{st}/S_{tr}=4$','$\lambda_{st}/\lambda_{tr}=-2$, $S_{st}/S_{tr}=1$','$\lambda_{st}/\lambda_{tr}=-2$, $S_{st}/S_{tr}=4$','narrow range','narrow range noncons','wide range','wide range noncons','low trop','low trop noncons','high trop','high trop noncons','narrow high res','wide high res'])        
+    #labels = (['sharp CTL','sharp NCONS-70','smooth CTL','smooth NCONS-70','shallow (100 hPa)','shallow (100 hPa) NCONS-70','deep (200 hPa)','deep (200 hPa) NCONS-70','low (300 hPa)','low (300 hPa) NCONS-70','high (200 hPa)','high (200 hPa) NCONS-70','narrow high res','wide high res'])#$\\regular{p_{trop}}$ = 
+#    labels = (['sharp CTL','sharp NCONS-70','smooth CTL','smooth NCONS-70','smooth shallow ($\\regular{\delta=0.1}$) CONS','smooth shallow ($\\regular{\delta=0.1}$) NCONS-70','smooth deep ($\\regular{\delta=0.2}$) CONS','smooth deep ($\\regular{\delta=0.2}$) NCONS-70','smooth low ($\\regular{p_*=0.3}$) CONS','smooth low ($\\regular{p_*=0.3}$) NCONS-70','smooth high ($\\regular{p_*=0.2}$) CONS','smooth high ($\\regular{p_*=0.2}$) NCONS-70','narrow high res','wide high res'])#$\\regular{p_{trop}}$ = 
     #labels = (['$\\varepsilon=2.0$, sharp','$\\varepsilon=2.5$, sharp','$\\varepsilon=1.5$, sharp','narrow range','narrow range noncons','wide range','wide range noncons','$\\varepsilon=2.5$, high trop','$\\varepsilon=2.5$, high trop, noncons','$\\varepsilon=2.0$, high trop','$\\varepsilon=2.0$, high trop, noncons','$\\varepsilon=1.5$, high trop','$\\varepsilon=1.5$, high trop, noncons','narrow high res','wide high res'])        
     #labels = (['no TIL','deep TIL: a7, 200-300','deep TIL: a5, 200-300','deep TIL: a8, 200-300','shallow TIL: a7, 225-275','low deep TIL: a7, 250-350','low shallow TIL: a7, 250-300','high deep TIL: a7, 150-250','high shallow TIL: a7, 200-250','linear TIL','smooth TIL','G&W1 TIL','G&W2 TIL','G&W3 TIL','G&W4 TIL','smooth (default)','smooth noncons','narrow range','narrow range noncons','wide range','wide range noncons','low trop','low trop noncons','high trop','high trop noncons','narrow high res','wide high res'])    
     #labels = (['default','even steps','uneven steps','narrow range','wide range','low trop','high trop','$\lambda_s/\lambda_t=0$','$\lambda_s/\lambda_t=-2$','one step','one center step','12'])
-    colors = ([c_blues[1],c_greys[0],'k',c_greys[0],'k',c_reds[1],c_reds[1],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],'y',c_reds[1]])
-    #colors = (['k','k','k','k',c_reds[1],c_reds[1],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],'y',c_reds[1]])
+    colors = (['k',c_greys[0],c_blues[1],c_greys[0],'k',c_reds[1],c_reds[1],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],'y',c_reds[1]])
+#    colors = (['k','k','k','k',c_reds[1],c_reds[1],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],'y',c_reds[1]])
     #colors = (['k',c_greys[0],c_greys[0],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],c_reds[1],c_reds[1],c_reds[1],c_blues[1],c_blues[1],c_blues[1],c_blues[1],'y',c_reds[1]])
     #colors = (['k',c_greys[0],c_greys[0],c_reds[1],c_reds[1],c_blues[1],c_blues[1],'y','y',c_greys[0],c_reds[1],c_blues[1]])
-    #alphas = ([1,.3,1,.3,1,.5,1,.5,1,.5,1,.5,1,.5,1,.5,1,1])
+#    alphas = ([1,.3,1,.3,1,.5,1,.5,1,.5,1,.5,1,.5,1,.5,1,1])
     alphas = ([1,1,1,.3,1,1,1,1,1,1,1,1,1,1])
-    #linestyles = ([':',':','-.','-.','-','-','--','--','-','-','--','--',':',':'])
+#    linestyles = ([':',':','-.','-.','-','-','--','--','-','-','--','--',':',':'])
     linestyles = (['-','-','-','-','-','--',':','-.','-','--','--','-','-','--','--','-',':'])
     #linestyles = (['-','-','--','-','--','-','--','-','--',':',':',':'])
 
@@ -90,7 +88,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_3[e,e2,:,-1],c=colors[3-1],alpha=alphas[3-1], ls=linestyles[3-1], lw=lw, label=labels[3-1])
             try:
-                sigmai_sorted_41
+                sigmai_sorted_4
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_4 not defined')
@@ -99,7 +97,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_4[e,e2,:,-1],c=colors[4-1],alpha=alphas[4-1], ls=linestyles[4-1], lw=lw, label=labels[4-1])
             try:
-                sigmai_sorted_51
+                sigmai_sorted_5
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_5 not defined')
@@ -108,7 +106,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_5[e,e2,:,-1],c=colors[5-1],alpha=alphas[5-1], ls=linestyles[5-1], lw=lw, label=labels[5-1])
             try:
-                sigmai_sorted_61
+                sigmai_sorted_6
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_6 not defined')
@@ -117,7 +115,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_6[e,e2,:,-1],c=colors[6-1],alpha=alphas[6-1], ls=linestyles[6-1], lw=lw, label=labels[6-1])
             try:
-                sigmai_sorted_71
+                sigmai_sorted_7
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_7 not defined')
@@ -126,7 +124,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_7[e,e2,:,-1],c=colors[7-1],alpha=alphas[7-1], ls=linestyles[7-1], lw=lw, label=labels[7-1])
             try:
-                sigmai_sorted_81
+                sigmai_sorted_8
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_8 not defined')
@@ -135,7 +133,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_8[e,e2,:,-1],c=colors[8-1],alpha=alphas[8-1], ls=linestyles[8-1], lw=lw, label=labels[8-1])
             try:
-                sigmai_sorted_91
+                sigmai_sorted_9
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_9 not defined')
@@ -144,7 +142,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_9[e,e2,:,-1],c=colors[9-1],alpha=alphas[9-1], ls=linestyles[9-1], lw=lw, label=labels[9-1])
             try:
-                sigmai_sorted_101
+                sigmai_sorted_10
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_10 not defined')
@@ -153,7 +151,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_10[e,e2,:,-1],c=colors[10-1],alpha=alphas[10-1], ls=linestyles[10-1], lw=lw, label=labels[10-1])
             try:
-                sigmai_sorted_111
+                sigmai_sorted_11
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_11 not defined')
@@ -162,7 +160,7 @@ def check_growthrates():
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_11[e,e2,:,-1],c=colors[11-1],alpha=alphas[11-1], ls=linestyles[11-1], lw=lw, label=labels[11-1])
             try:
-                sigmai_sorted_121
+                sigmai_sorted_12
             except NameError:
                 if e == 0:
                     print ('sigmai_sorted_12 not defined')
@@ -179,9 +177,10 @@ def check_growthrates():
                 ax1.semilogx(wl,sigmai_sorted_13[e,e2,:,-1],c=colors[13-1],alpha=alphas[13-1], ls=linestyles[13-1], lw=lw, label=labels[13-1])
                 if two_subplots == True:
                     ax2.semilogx(wl,sigmai_sorted_13[e,e2,:,-1],c=colors[13-1],alpha=alphas[13-1], ls=linestyles[13-1], lw=lw, label=labels[13-1])
-    #ax1.text(1.08,1.45,'(a)',horizontalalignment='left',verticalalignment='top',fontsize=20) #1.423,1.1
+
     if two_subplots == True:
-        ax2.text(1.775,1.345,'(b)',horizontalalignment='left',verticalalignment='top',fontsize=20) #2.465,0.975
+        ax1.text(1.423,1.1,'(a)',horizontalalignment='left',verticalalignment='top',fontsize=20) #1.423,1.1 #1.08,1.45
+        ax2.text(2.465,0.975,'(b)',horizontalalignment='left',verticalalignment='top',fontsize=20) #2.465,0.975 #1.775,1.345
                 
     #ax1.semilogx(wl,sigmai_sorted[e,e2,:,-1],c='y', lw=2*lw, alpha=.3)
     ax1.axhline(0,color='dimgrey',linewidth=1.5)
@@ -194,37 +193,33 @@ def check_growthrates():
 #    ax1.set_yticks([0,1,2,3,4,5])
 #    ax1.set_yticklabels([0,1,2,3,4,5], fontsize=25)
     ax1.tick_params(axis="y")
-#    ax1.set_ylim(0,1.1)#1.1)
-#    ax1.set_ylim(.93,.975)
-    ax1.set_ylim(bottom=0, top=1.2)#36)#1.36)
+    ax1.set_ylim(bottom=0, top=1.35)#bottom=0, top=1.1)#bottom=0, top=1.45)#
     if two_subplots == True:
         ax2.set_ylabel('growth rate (days$^{-1}$)')
         ax2.tick_params(axis="y")
-        ax2.set_ylim(bottom=1.305, top=1.345)#36)#1.36)
+        ax2.set_ylim(bottom=0.925, top=0.975)#bottom=1.305, top=1.345)
         
     ax1.set_xlabel('wavelength (1000 km)')
     ax1.set_xticks(np.arange(2,20,2))
     ax1.set_xticklabels(np.arange(2,20,2))
-#    ax1.set_xticks(np.arange(3,6,.5))
-#    ax1.set_xticklabels(np.arange(3,6,.5), fontsize=25)
-    ax1.set_xlim(left=1.6,right=15.9)#,20)#1.8
-#    ax1.set_xlim(2.8,5)
+    ax1.set_xlim(left=1.6,right=15.9)#left=1.75,right=20)#left=1.4,right=20)#
     ax1.xaxis.set_minor_formatter(NullFormatter())
     if two_subplots == True:
         ax2.set_xlabel('wavelength (1000 km)')
         ax2.set_xticklabels(np.arange(2,20,1))
         ax2.set_xticks(np.arange(2,20,1))
-        ax2.set_xlim(left=1.9,right=3.8)#,20)#1.8
+        ax2.set_xlim(left=2.6,right=4.6)#left=1.9,right=3.8)
+#        ax2.set_xlim(2.8,5)
         ax2.xaxis.set_minor_formatter(NullFormatter())
             
     box = ax1.get_position()
     ax1.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-    leg = ax1.legend(handlelength=2.1, loc='lower right', fontsize=15)
+    leg = ax1.legend(handlelength=2.1, loc='upper right', fontsize=15)
     leg.get_frame().set_alpha(1)
     if two_subplots == True:
         box = ax2.get_position()
         ax2.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-        leg = ax2.legend(handlelength=2.1, loc='best', fontsize=15)
+        leg = ax2.legend(handlelength=2.1, loc='upper right', fontsize=15)
         leg.get_frame().set_alpha(1)
 
     #plt.grid()
@@ -500,7 +495,7 @@ def save_growthrates(data,i):
 
     data = data; i=i # what data do you want to save?
 
-    with open(f'sigmai_sorted_{i}.csv', 'w') as outfile:
+    with open(f'model_output/sigmai_sorted__sharp_CTL/sigmai_sorted_{i}.csv', 'w') as outfile:
         # We write this header for readable, the pound symbol
         # will cause numpy to ignore it
         outfile.write('# Array shape: {0}\n'.format(data.shape))
@@ -528,7 +523,7 @@ def load_growthrates(data,i):
     
     print (i)
     
-    new_data = np.loadtxt(f'sigmai_sorted__latent_heating/sigmai_sorted_{i}.csv')
+    new_data = np.loadtxt(f'model_output/sigmai_sorted__no_latent_heating/sigmai_sorted_{i}.csv')
     # Note that this returned a 2D array!
     print(new_data.shape)
 
@@ -1687,36 +1682,36 @@ def save_sharp_tropopause_sensitivity():
 
     # save the most important variables from sharp experiments for lambda-S diagram
                         
-    np.savetxt('lambda-S_diagram/l2l1_sort.txt',l2l1_sort)
-    np.savetxt('lambda-S_diagram/S2S1_sort.txt',S2S1_sort)
-    np.savetxt('lambda-S_diagram/gr_sort.txt',gr_sort)
-    np.savetxt('lambda-S_diagram/wl_sort.txt',wl_sort)
-    np.savetxt('lambda-S_diagram/dq_sort.txt',dq_sort)
-    np.savetxt('lambda-S_diagram/cph_sort.txt',cph_sort)
-    np.savetxt('lambda-S_diagram/Ttropeps_sort.txt',Ttropeps_sort)
-    np.savetxt('lambda-S_diagram/Tsurf_sort.txt',Tsurf_sort)
-    np.savetxt('lambda-S_diagram/psitropeps_sort.txt',psitropeps_sort)
-    np.savetxt('lambda-S_diagram/psisurf_sort.txt',psisurf_sort)
-    np.savetxt('lambda-S_diagram/Tvsurf_sort.txt',Tvsurf_sort)
-    np.savetxt('lambda-S_diagram/Tvtrop_sort.txt',Tvtrop_sort)
+    np.savetxt('model_output/lambda-S_diagram/l2l1_sort.txt',l2l1_sort)
+    np.savetxt('model_output/lambda-S_diagram/S2S1_sort.txt',S2S1_sort)
+    np.savetxt('model_output/lambda-S_diagram/gr_sort.txt',gr_sort)
+    np.savetxt('model_output/lambda-S_diagram/wl_sort.txt',wl_sort)
+    np.savetxt('model_output/lambda-S_diagram/dq_sort.txt',dq_sort)
+    np.savetxt('model_output/lambda-S_diagram/cph_sort.txt',cph_sort)
+    np.savetxt('model_output/lambda-S_diagram/Ttropeps_sort.txt',Ttropeps_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tsurf_sort.txt',Tsurf_sort)
+    np.savetxt('model_output/lambda-S_diagram/psitropeps_sort.txt',psitropeps_sort)
+    np.savetxt('model_output/lambda-S_diagram/psisurf_sort.txt',psisurf_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tvsurf_sort.txt',Tvsurf_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tvtrop_sort.txt',Tvtrop_sort)
                         
 # -----------------------------------------------------------------------------
     
 def load_sharp_tropopause_sensitivity():
 
-    l2l1_sort = np.loadtxt('lambda-S_diagram/l2l1_sort.txt')
-    S2S1_sort = np.loadtxt('lambda-S_diagram/S2S1_sort.txt')
-    gr_sort = np.loadtxt('lambda-S_diagram/gr_sort.txt')
-    wl_sort = np.loadtxt('lambda-S_diagram/wl_sort.txt')
-    dq_sort = np.loadtxt('lambda-S_diagram/dq_sort.txt')
-    cph_sort = np.loadtxt('lambda-S_diagram/cph_sort.txt')
-    Ttropeps_sort = np.loadtxt('lambda-S_diagram/Ttropeps_sort.txt')
-    Tsurf_sort = np.loadtxt('lambda-S_diagram/Tsurf_sort.txt')
-    psitropeps_sort = np.loadtxt('lambda-S_diagram/psitropeps_sort.txt')
-    psisurf_sort = np.loadtxt('lambda-S_diagram/psisurf_sort.txt')
-    Tvsurf_sort = np.loadtxt('lambda-S_diagram/Tvsurf_sort.txt')
-    Tvtrop_sort = np.loadtxt('lambda-S_diagram/Tvtrop_sort.txt')
-    dqdy = np.loadtxt('lambda-S_diagram/dqdy.txt')
+    l2l1_sort = np.loadtxt('model_output/lambda-S_diagram/l2l1_sort.txt')
+    S2S1_sort = np.loadtxt('model_output/lambda-S_diagram/S2S1_sort.txt')
+    gr_sort = np.loadtxt('model_output/lambda-S_diagram/gr_sort.txt')
+    wl_sort = np.loadtxt('model_output/lambda-S_diagram/wl_sort.txt')
+    dq_sort = np.loadtxt('model_output/lambda-S_diagram/dq_sort.txt')
+    cph_sort = np.loadtxt('model_output/lambda-S_diagram/cph_sort.txt')
+    Ttropeps_sort = np.loadtxt('model_output/lambda-S_diagram/Ttropeps_sort.txt')
+    Tsurf_sort = np.loadtxt('model_output/lambda-S_diagram/Tsurf_sort.txt')
+    psitropeps_sort = np.loadtxt('model_output/lambda-S_diagram/psitropeps_sort.txt')
+    psisurf_sort = np.loadtxt('model_output/lambda-S_diagram/psisurf_sort.txt')
+    Tvsurf_sort = np.loadtxt('model_output/lambda-S_diagram/Tvsurf_sort.txt')
+    Tvtrop_sort = np.loadtxt('model_output/lambda-S_diagram/Tvtrop_sort.txt')
+    dqdy = np.loadtxt('model_output/lambda-S_diagram/dqdy.txt')
                     
 # -----------------------------------------------------------------------------
     
@@ -1724,35 +1719,35 @@ def save_smooth_tropopause_sensitivity():
 
     # save the most important variables from smooth experiments for lambda-S diagram
                             
-    np.savetxt('lambda-S_diagram/l2l1_sm_sort.txt',l2l1_sm_sort)
-    np.savetxt('lambda-S_diagram/S2S1_sm_sort.txt',S2S1_sm_sort)
-    np.savetxt('lambda-S_diagram/gr_sm_sort.txt',gr_sm_sort)
-    np.savetxt('lambda-S_diagram/wl_sm_sort.txt',wl_sm_sort)
-    np.savetxt('lambda-S_diagram/dq_sm_sort.txt',dq_sm_sort)
-    np.savetxt('lambda-S_diagram/cph_sm_sort.txt',cph_sm_sort)
-    np.savetxt('lambda-S_diagram/Ttroprange_sm_sort.txt',Ttroprange_sm_sort)
-    np.savetxt('lambda-S_diagram/Tsurf_sm_sort.txt',Tsurf_sm_sort)
-    np.savetxt('lambda-S_diagram/psitrop_sm_sort.txt',psitrop_sm_sort)
-    np.savetxt('lambda-S_diagram/psisurf_sm_sort.txt',psisurf_sm_sort)
-    np.savetxt('lambda-S_diagram/Tvsurf_sm_sort.txt',Tvsurf_sm_sort)
-    np.savetxt('lambda-S_diagram/Tvtrop_sm_sort.txt',Tvtrop_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/l2l1_sm_sort.txt',l2l1_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/S2S1_sm_sort.txt',S2S1_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/gr_sm_sort.txt',gr_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/wl_sm_sort.txt',wl_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/dq_sm_sort.txt',dq_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/cph_sm_sort.txt',cph_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/Ttroprange_sm_sort.txt',Ttroprange_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tsurf_sm_sort.txt',Tsurf_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/psitrop_sm_sort.txt',psitrop_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/psisurf_sm_sort.txt',psisurf_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tvsurf_sm_sort.txt',Tvsurf_sm_sort)
+    np.savetxt('model_output/lambda-S_diagram/Tvtrop_sm_sort.txt',Tvtrop_sm_sort)
                     
 # -----------------------------------------------------------------------------
     
 def load_smooth_tropopause_sensitivity():
     
-    l2l1_sm_sort = np.loadtxt('lambda-S_diagram/l2l1_sm_sort.txt')
-    S2S1_sm_sort = np.loadtxt('lambda-S_diagram/S2S1_sm_sort.txt')
-    gr_sm_sort = np.loadtxt('lambda-S_diagram/gr_sm_sort.txt')
-    wl_sm_sort = np.loadtxt('lambda-S_diagram/wl_sm_sort.txt')
-    dq_sm_sort = np.loadtxt('lambda-S_diagram/dq_sm_sort.txt')
-    cph_sm_sort = np.loadtxt('lambda-S_diagram/cph_sm_sort.txt')
-    Ttroprange_sm_sort = np.loadtxt('lambda-S_diagram/Ttroprange_sm_sort.txt')
-    Tsurf_sm_sort = np.loadtxt('lambda-S_diagram/Tsurf_sm_sort.txt')
-    psitrop_sm_sort = np.loadtxt('lambda-S_diagram/psitrop_sm_sort.txt')
-    psisurf_sm_sort = np.loadtxt('lambda-S_diagram/psisurf_sm_sort.txt')
-    Tvsurf_sm_sort = np.loadtxt('lambda-S_diagram/Tvsurf_sm_sort.txt')
-    Tvtrop_sm_sort = np.loadtxt('lambda-S_diagram/Tvtrop_sm_sort.txt')
+    l2l1_sm_sort = np.loadtxt('model_output/lambda-S_diagram/l2l1_sm_sort.txt')
+    S2S1_sm_sort = np.loadtxt('model_output/lambda-S_diagram/S2S1_sm_sort.txt')
+    gr_sm_sort = np.loadtxt('model_output/lambda-S_diagram/gr_sm_sort.txt')
+    wl_sm_sort = np.loadtxt('model_output/lambda-S_diagram/wl_sm_sort.txt')
+    dq_sm_sort = np.loadtxt('model_output/lambda-S_diagram/dq_sm_sort.txt')
+    cph_sm_sort = np.loadtxt('model_output/lambda-S_diagram/cph_sm_sort.txt')
+    Ttroprange_sm_sort = np.loadtxt('model_output/lambda-S_diagram/Ttroprange_sm_sort.txt')
+    Tsurf_sm_sort = np.loadtxt('model_output/lambda-S_diagram/Tsurf_sm_sort.txt')
+    psitrop_sm_sort = np.loadtxt('model_output/lambda-S_diagram/psitrop_sm_sort.txt')
+    psisurf_sm_sort = np.loadtxt('model_output/lambda-S_diagram/psisurf_sm_sort.txt')
+    Tvsurf_sm_sort = np.loadtxt('model_output/lambda-S_diagram/Tvsurf_sm_sort.txt')
+    Tvtrop_sm_sort = np.loadtxt('model_output/lambda-S_diagram/Tvtrop_sm_sort.txt')
     
 # -----------------------------------------------------------------------------
     
@@ -2703,7 +2698,7 @@ def plot_error_growth_4D_matrix():
             cm_br_scat = LinearSegmentedColormap.from_list('my_list', cm_colors, N=17)
             cm_colors = [cm_br_scat(0),cm_br_scat(0),cm_br_scat(0),cm_br_scat(0),cm_br_scat(1),cm_br_scat(1),cm_br_scat(1),cm_br_scat(1),cm_br_scat(2),cm_br_scat(2),cm_br_scat(2),cm_br_scat(2),cm_br_scat(5),cm_br_scat(6),cm_br_scat(7),cm_br_scat(8),cm_br_scat(8),cm_br_scat(9),cm_br_scat(10),cm_br_scat(11),cm_br_scat(14),cm_br_scat(14),cm_br_scat(14),cm_br_scat(14),cm_br_scat(15),cm_br_scat(15),cm_br_scat(15),cm_br_scat(15),cm_br_scat(16),cm_br_scat(16),cm_br_scat(16),cm_br_scat(16)]
             cm_br_scat = LinearSegmentedColormap.from_list('my_list', cm_colors, N=len(cm_colors))
-            ticks = np.array([-16,-12, -8, -4, -3, -2, -1, 1, 2, 3, 4, 8, 12, 16])
+            ticks = np.array([-16,-12, -8, -4, -1, 1, 4, 8, 12, 16]) ### consider to remove +/- 2 and 3 for the second plot
         elif cb_v3 == True:
             vmin = -12
             vmax = 16
@@ -2736,22 +2731,22 @@ def plot_error_growth_4D_matrix():
         ax.set_ylim(170,330)
         ax.invert_yaxis()
         for j in range(len(np.tile(ran_ticks,ndalt))):
-            ax.text(np.tile(ran_ticks,ndalt)[j],np.repeat(alt_ticks,ndran)[j],'{:1.1f}'.format(((error_matrix_noheating)[i*ndran:(i+1)*ndran,:]).T.ravel()[j]),horizontalalignment='center',verticalalignment='center',fontsize=16)
+            ax.text(np.tile(ran_ticks,ndalt)[j],np.repeat(alt_ticks,ndran)[j],'{:1.1f}'.format(((error_matrix_noheating)[i*ndran:(i+1)*ndran,:]).T.ravel()[j]),horizontalalignment='center',verticalalignment='center',fontsize=18)
     axes.flat[0].set_title('CONS', fontsize=20)
     axes.flat[1].set_title('NCONS-85', fontsize=20)
     axes.flat[2].set_title('NCONS-70', fontsize=20)
     axes.flat[0].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
     axes.flat[1].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
     axes.flat[2].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
-    axes.flat[0].set_ylabel('$\\regular{\\varepsilon=0}$ \n$\\regular{altitude \; (hPa)}$', fontsize=20)
+    axes.flat[0].set_ylabel('$\\regular{\\varepsilon=0}$ \n\n$\\regular{altitude \; (hPa)}$', fontsize=20)
     #axes.flat[0].text(-85,160,'a)')
     
-    cb = fig.colorbar(im, ax=axes, orientation='horizontal', fraction=.2, shrink=1., anchor=(0.5, -2), boundaries=np.arange(-4,5,1),ticks=ticks)
+    cb = fig.colorbar(im, ax=axes, orientation='horizontal', fraction=.2, shrink=1., anchor=(0.5, -1), boundaries=np.arange(-4,5,1),ticks=ticks)
     if plot_gr == False:
-        cb.set_label(label=f'error after {day} days (%) relative to sharp experiment', size=20)
+        cb.set_label(label=f'error after {day} days (%) relative to sharp experiment', size=18)
     else:
-        cb.set_label(label=f'change in growth rate (%) relative to sharp experiment', size=20)
-    cb.ax.tick_params(labelsize=20)
+        cb.set_label(label=f'change in growth rate (%) relative to sharp experiment', size=18)
+    cb.ax.tick_params(labelsize=18)
 
     plt.savefig(f'/home/kfl078/Downloads/4Dmatrix_noheating_growthrate_common-colorbar.pdf', transparent=True, bbox_inches='tight', pad_inches=.1)
 
@@ -2798,25 +2793,25 @@ def plot_error_growth_4D_matrix():
         ax.set_ylim(170,330)
         ax.invert_yaxis()
         for j in range(len(np.tile(ran_ticks,ndalt))):
-            ax.text(np.tile(ran_ticks,ndalt)[j],np.repeat(alt_ticks,ndran)[j],'{:1.1f}'.format(((error_matrix_heating)[i*ndran:(i+1)*ndran,:]).T.ravel()[j]),horizontalalignment='center',verticalalignment='center',fontsize=16)
+            ax.text(np.tile(ran_ticks,ndalt)[j],np.repeat(alt_ticks,ndran)[j],'{:1.1f}'.format(((error_matrix_heating)[i*ndran:(i+1)*ndran,:]).T.ravel()[j]),horizontalalignment='center',verticalalignment='center',fontsize=18)
     axes.flat[0].set_title('CONS', fontsize=20)
     axes.flat[1].set_title('NCONS-85', fontsize=20)
     axes.flat[2].set_title('NCONS-70', fontsize=20)
-    axes.flat[ndcons*(ndeps-1)-3].set_xlabel('$\\regular_{vertical \; extent \; (hPa)}$', fontsize=20)
-    axes.flat[ndcons*(ndeps-1)-2].set_xlabel('$\\regular_{vertical \; extent \; (hPa)}$', fontsize=20)
-    axes.flat[ndcons*(ndeps-1)-1].set_xlabel('$\\regular_{vertical \; extent \; (hPa)}$', fontsize=20)
+    axes.flat[ndcons*(ndeps-1)-3].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
+    axes.flat[ndcons*(ndeps-1)-2].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
+    axes.flat[ndcons*(ndeps-1)-1].set_xlabel('$\\regular{vertical \; extent \; (hPa)}$', fontsize=20)
     #axes.flat[0].set_ylabel('$\\regular{\\varepsilon=0}$ \n$\\regular_{altitude}$', fontsize=35)
-    axes.flat[0].set_ylabel('$\\regular{\\varepsilon=1.5}$ \n$\\regular_{altitude \; (hPa)}$', fontsize=20)
-    axes.flat[3].set_ylabel('$\\regular{\\varepsilon=2.0}$ \n$\\regular_{altitude \; (hPa)}$', fontsize=20)
-    axes.flat[6].set_ylabel('$\\regular{\\varepsilon=2.5}$ \n$\\regular_{altitude \; (hPa)}$', fontsize=20)
+    axes.flat[0].set_ylabel('$\\regular{\\varepsilon=1.5}$ \n\n$\\regular{altitude \; (hPa)}$', fontsize=20)
+    axes.flat[3].set_ylabel('$\\regular{\\varepsilon=2.0}$ \n\n$\\regular{altitude \; (hPa)}$', fontsize=20)
+    axes.flat[6].set_ylabel('$\\regular{\\varepsilon=2.5}$ \n\n$\\regular{altitude \; (hPa)}$', fontsize=20)
     #axes.flat[0].text(-85,160,'b)')
 
-    cb = fig.colorbar(im, ax=axes, orientation='horizontal', fraction=.2, shrink=1., anchor=(0.5, 1.25), boundaries=np.arange(-16,17,1), ticks=ticks)
+    cb = fig.colorbar(im, ax=axes, orientation='horizontal', fraction=.2, shrink=1., anchor=(0.5, 1.37), boundaries=np.arange(-16,17,1), ticks=ticks)
     if plot_gr == False:
-        cb.set_label(label=f'error after {day} days (%) relative to sharp experiment for $\\varepsilon=2$', size=20)
+        cb.set_label(label=f'error after {day} days (%) relative to sharp experiment for $\\varepsilon=2$', size=18)
     else:
-        cb.set_label(label=f'change in growth rate (%) relative to sharp experiment', size=20)
-    cb.ax.tick_params(labelsize=20)
+        cb.set_label(label=f'change in growth rate (%) relative to sharp experiment', size=18)
+    cb.ax.tick_params(labelsize=18)
 
     plt.savefig(f'/home/kfl078/Downloads/4Dmatrix_heating_growthrate_common-colorbar.pdf', transparent=True, bbox_inches='tight', pad_inches=0.1)
 
@@ -6819,8 +6814,8 @@ def structureplotcustom(ax):
         #ax.set_xticklabels([-int(wl[i_maxunstab[eps1_index,eps2_index]]/2*1000),0,int(wl[i_maxunstab[eps1_index,eps2_index]]/2*1000)])
         ax.set_ylabel('pressure (hPa)')
 #        ax.set_yscale('log')
-        ax.set_yticks([0,.25,1])###
-        ax.set_yticklabels(['0','250','1000'])###
+        ax.set_yticks([0,.25,.4,.9,1])###
+        ax.set_yticklabels(['0','250','400','900','1000'])###
         ax.tick_params(axis='both')
         ax.set_title('')  
     ax.invert_yaxis()
@@ -6838,7 +6833,7 @@ z = np.insert(-R*Tref/g*np.log(p[1:nrws]/1),0,np.array([nan]))
 def plot_psi_structure():
 
     with plt.rc_context(frame):
-        fig, (ax0) = plt.subplots(1, figsize=(5,4.5), dpi=300)#10,9
+        fig, (ax0) = plt.subplots(1, figsize=(8,7.2), dpi=300)#10,9
 
         norm = MidpointNormalize(midpoint=0)
 
@@ -6871,7 +6866,7 @@ def plot_psi_structure():
         #ax0.axhline(p[np.argwhere(dqdy == np.max(dqdy[1:-1]))[-1][0]],c='y',ls='--')
         #ax0.set_ylabel('')
 
-        ax0.text(-1,0.0135,'(a)')
+        ax0.text(-1.35,0.019,'(a)')
                 
         fig.tight_layout()
         fig.savefig(f'/home/kfl078/Downloads/structure_psi.pdf', transparent=True)
@@ -7468,13 +7463,18 @@ def plot_PV_structure():
 
     norm = MidpointNormalize(midpoint=0)
 
-
-    fig = plt.figure(figsize=(15, 7)) 
-    gs = gridspec.GridSpec(1, 3, width_ratios=[3, 1, 1]) 
+    two_subplots = True
+    if two_subplots == True:
+        fig = plt.figure(figsize=(15*4/5.4*.75, 7.2*.75)) 
+        gs = gridspec.GridSpec(1, 2, width_ratios=[3, 1.3]) 
+    else:
+        fig = plt.figure(figsize=(15, 7.2))
+        gs = gridspec.GridSpec(1, 3, width_ratios=[3, 1, 1.4]) 
+        ax2 = plt.subplot(gs[2])
     ax0 = plt.subplot(gs[0])
     ax1 = plt.subplot(gs[1])
-    ax2 = plt.subplot(gs[2])
 #    fig, (ax0,ax1) = plt.subplots(2, figsize=(10,9), dpi=300)
+
     PVplot = ax0.contourf(kx, p[:nrws], PV_u[eps1_index,eps2_index], lev, norm=norm, cmap=cm_br)
     ax0.contour(kx, p[:nrws], psi, colors='k')
     #fig.colorbar(PVplot)
@@ -7484,24 +7484,42 @@ def plot_PV_structure():
     structureplotcustom(ax0)
 #    ax0.set_title('$\mathregular{\\varepsilon}$ = %d' %(epsilon1[eps1_index]), fontsize=18)
 #    ax0.set_xlabel('%d km wavelength' %(wl[i_maxunstab[eps1_index]]*1000), fontsize=14)
-#    ax1.set_ylim(pt,ps)
+    ax1.set_xlim([-.1*np.max(np.max(PV_u[eps1_index,eps2_index],axis=1)[1:-2]),1.1*np.max(np.max(PV_u[eps1_index,eps2_index],axis=1)[1:-2])])
+    ax1.set_ylim(pt,ps)
     structureplotcustom(ax1)
     ax1.plot(np.max(PV_u[eps1_index,eps2_index],axis=1),p[:nrws], c='k')
-    ax1.set_xlabel('zonal max of PV')
     ax1.set_ylabel('')
-    for j in range(nrws):
-        if np.max(PV_u[eps1_index,eps2_index,j]) > .01*np.max(PV_u[eps1_index,eps2_index]):
-            ax2.scatter(360/len(kx)*np.argwhere(PV_u[eps1_index,eps2_index,j] == np.max(PV_u[eps1_index,eps2_index,j]))[0][0],p[j],c='k',alpha=.5,s=30+200*np.max(PV_u[eps1_index,eps2_index,j])/np.max(PV_u[eps1_index,eps2_index]))
-    ax2.axvline(90,c='k',ls='--')
-    ax2.axvline(180,c='k',ls='--')
-    ax2.axvline(270,c='k',ls='--')
-    structureplotcustom(ax2)
-    ax2.set_xlabel('deg of max PV')
-    ax2.set_xticks([0,90,180,270])
-    ax1.set_ylim([1,0])
-    ax2.set_ylim([1,0])
-    ax2.set_ylabel('')
-#    ax2.set_ylim(pt,ps)
+    if two_subplots == False:
+        ax0.set_xlabel('kx',labelpad=31)
+        ax1.set_xlabel('PV amplitude',labelpad=31)
+        for j in range(nrws):
+            if np.max(PV_u[eps1_index,eps2_index,j]) > .01*np.max(PV_u[eps1_index,eps2_index]):
+                ax2.scatter(360/len(kx)*np.argwhere(PV_u[eps1_index,eps2_index,j] == np.max(PV_u[eps1_index,eps2_index,j]))[0][0],p[j],c='k',alpha=.5,s=30+200*np.max(PV_u[eps1_index,eps2_index,j])/np.max(PV_u[eps1_index,eps2_index]))
+        ax2.axvline(90,c='k',ls='--')
+        ax2.axvline(180,c='k',ls='--')
+        ax2.axvline(270,c='k',ls='--')
+        structureplotcustom(ax2)
+        ax2.set_xlabel('phase of max PV')
+        ax2.set_xticks([0,90,180,270])
+        ax1.set_ylim([1,0])
+        ax2.set_ylim([1,0])
+        ax2.set_ylabel('')
+#        ax2.set_ylim(pt,ps)
+
+        fig.tight_layout()
+        ax0.text(-1.4,0.019,'(a)')
+        ax1.text(-6,0.019,'(b)')
+        ax2.text(-120,0.019,'(c)')
+    
+    else:
+        ax0.set_xlabel('kx')#,labelpad=31)
+        ax1.set_xlabel('PV amplitude')#,labelpad=31)
+        ax1.set_yticklabels('')
+        #fig.tight_layout()
+        ax0.text(-1.95,0.019,'(a)')
+        ax1.text(-1.,0.019,'(b)')
+
+    fig.savefig(f'/home/kfl078/Downloads/structure_PV.pdf', transparent=True, bbox_inches='tight', pad_inches=0.1)
     
     fig, (ax0) = plt.subplots(1, figsize=(10,9), dpi=300)
     Cplot = ax0.contourf(kx, p[:nrws], PV3_u[eps1_index,eps2_index], lev, cmap=cm_br)
