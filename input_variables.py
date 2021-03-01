@@ -68,7 +68,7 @@ Spro = False			# Mak1998
     
     
 ### add stratosphere?
-stratos = True###         # Flacké
+stratos = False###         # Flacké
 
 # settings at tropopause
 smoothstrat     = False # smoothing stratification profile?              Vicky

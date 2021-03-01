@@ -6812,10 +6812,12 @@ def structureplotcustom(ax):
         ax.set_xlabel('kx')
         ax.set_xticks([])#0,np.pi,2*np.pi])
         #ax.set_xticklabels([-int(wl[i_maxunstab[eps1_index,eps2_index]]/2*1000),0,int(wl[i_maxunstab[eps1_index,eps2_index]]/2*1000)])
-        ax.set_ylabel('pressure (hPa)')
+        ax.set_ylabel('z/H')#pressure (hPa)')
 #        ax.set_yscale('log')
         ax.set_yticks([0,.25,.4,.9,1])###
+        ax.set_yticks([0,.5,1])###
         ax.set_yticklabels(['0','250','400','900','1000'])###
+        ax.set_yticklabels(['1','0.5','0'])###
         ax.tick_params(axis='both')
         ax.set_title('')  
     ax.invert_yaxis()
@@ -6833,14 +6835,17 @@ z = np.insert(-R*Tref/g*np.log(p[1:nrws]/1),0,np.array([nan]))
 def plot_psi_structure():
 
     with plt.rc_context(frame):
-        fig, (ax0) = plt.subplots(1, figsize=(8,7.2), dpi=300)#10,9
+        #fig, (ax0) = plt.subplots(1, figsize=(8,7.2), dpi=300)#10,9
+        fig, (ax0) = plt.subplots(1, figsize=(9,6), dpi=300)#10,9
 
         norm = MidpointNormalize(midpoint=0)
 
-        psiplot = ax0.contourf(kx, p[:nrws], psi, lev, cmap=cm_br, norm=norm, origin='lower')
-        ax0.contour(kx, p[:nrws], T[eps1_index,eps2_index], (np.linspace(-np.max(T),-np.max(T)/12,6)), colors='k')
-        ax0.contour(kx, p[:nrws], T[eps1_index,eps2_index], (np.linspace(np.max(T)/12,np.max(T),6)), colors='k')
-        wplot = ax0.contour(kx, p[:nrws], w,  10, colors='grey')
+        #psiplot = ax0.contourf(kx, p[:nrws], psi, lev, cmap=cm_br, norm=norm, origin='lower')
+        #ax0.contour(kx, p[:nrws], T[eps1_index,eps2_index], (np.linspace(-np.max(T),-np.max(T)/12,6)), colors='k')
+        #ax0.contour(kx, p[:nrws], T[eps1_index,eps2_index], (np.linspace(np.max(T)/12,np.max(T),6)), colors='k')
+        #wplot = ax0.contour(kx, p[:nrws], w,  10, colors='grey')
+        psiplot = ax0.contour(kx, p[:nrws], psi, 5, colors='k')
+        ax0.contourf(kx, p[:nrws], T[eps1_index,eps2_index], 12, cmap=cm_br, norm=norm)
                 
 #        ax0.plot(kx[np.argwhere(T[eps1_index,eps2_index,-1]==np.max(T[eps1_index,eps2_index,-1 ]))[0][0]],p[-4],'o',ms=30,c=(.8,.8,.8),markeredgecolor='k')
 #        ax0.plot(kx[np.argwhere(T[eps1_index,eps2_index,jtrop+1]-T[eps1_index,eps2_index,jtrop-1]==np.min(T[eps1_index,eps2_index,jtrop+1]-T[eps1_index,eps2_index,jtrop-1]))[0][0]],p[jtrop],'o',ms=30,c=(.8,.8,.8),markeredgecolor='k')
@@ -6866,7 +6871,7 @@ def plot_psi_structure():
         #ax0.axhline(p[np.argwhere(dqdy == np.max(dqdy[1:-1]))[-1][0]],c='y',ls='--')
         #ax0.set_ylabel('')
 
-        ax0.text(-1.35,0.019,'(a)')
+        #ax0.text(-1.35,0.019,'(a)')
                 
         fig.tight_layout()
         fig.savefig(f'/home/kfl078/Downloads/structure_psi.pdf', transparent=True)
