@@ -4,7 +4,7 @@
 Two-dimensional quasi-geostrophic numerical model
 -------------------------------------------------
 
-Author: 	Kristine Flacké Haualand
+Author: 	Kristine Flacké Haualand (with some input from Vicky Meulenberg)
 
 Year: 		2015
 
