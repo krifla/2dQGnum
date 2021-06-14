@@ -11,7 +11,7 @@ Year: 		2015
 Location: 	Geophysical Institute, University of Bergen, Bergen, Norway
 
 
-For questions/suggestions: Kristine.Haualand@uib.no
+For questions/suggestions/feedback: Kristine.Haualand@uib.no
 
 -----------
 Description
@@ -41,8 +41,8 @@ plotting_settings.py  --> some general plotting settings
 
 model_core.py         --> definition and solution of matrix problem
 
-prepare_variables.py  --> calcucating new model variables and extending all model variables to two dimensions
+prepare_variables.py  --> calculating new model variables and extending all model variables to two dimensions
 
 plot_output.py        --> scripts for visualisation of model output
 
-trajectories.py       --> calulcates backward trajectories
+trajectories.py       --> calculates backward trajectories
