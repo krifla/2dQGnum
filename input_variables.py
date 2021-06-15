@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Vicky stuff:
-# pbetween 1 and 2 and jbetween 1 and 2
-# klaas?
-# stratidilution -> smoothstrat	
-# smoothstrato -> smooth_S
-# smooth -> smooth_u
-
 
 # *****************************************************************************
 # -----------------------------------------------------------------------------
@@ -21,7 +14,7 @@
 
 ### what kind of diabatic heating?
 heating1	= False		# latent heating			                    Mak1994
-heating1_ice= False		# latent heating at ice cloud stage	            Flacké
+heating1_ice	= False		# latent heating at ice cloud stage	            Flacké
 evap		= False		# latent cooling below heating layer    	    Flacké
 heating2	= False		# sensible surface fluxes		                Mak1998
 
@@ -35,7 +28,7 @@ h2pro	= False			# Mak1998
 
 # heating parameters
 if heating1 == True:
-    epsilon1 = np.array([0,1.5,2,2.5])### 3 for tropopause experiments
+    epsilon1 = np.array([12.5]) # 3 for tropopause experiments
 if heating1 == False:
     epsilon1 = np.array([0])
 eps1_index = 0
@@ -53,7 +46,7 @@ if wpar == True and vpar == True:
 
 ### discontinuous stratification?
 if heating2 == True:
-    disc_strat = False###		# Mak1998
+    disc_strat = False		# Mak1998
 else:
     disc_strat = False		# Mak1994
 
@@ -95,7 +88,7 @@ if drag == False:
 ffac = 1.			        # f is set to 10^-4 corresponding to 43 deg and ffac is the difference factor from this
             			    # ex: ffac = 1.3 (1.4) corresponds to 1.3 (1.4) *10^-4 and 63 (74) deg North
 epsilon1 = epsilon1/ffac**2	# epsilon1 is a function of the Coriolis parameter
-beta = 0#1.6			    # 1.6*10^-11 at 44 deg, 1.0*10^-11 at 63 deg
+beta = 0 #1.6			    # 1.6*10^-11 at 44 deg, 1.0*10^-11 at 63 deg
 
 
 # -----------------------------------------------------------------------------
@@ -109,23 +102,23 @@ k	= 2.*np.pi/wl
 
 ### pressure levels and resolution
 
-ps	    = 1.		# pressure @ surface/bottom of domain		Mak1994+1998
-ptml	= .9		# pressure @ top of moist layer			    Mak1994: 0.9
+ps	= 1.		# pressure @ surface/bottom of domain		Mak1994+1998
+ptml	= .9		# pressure @ top of moist layer			Mak1994: 0.9
 pblc	= ptml		# pressure @ bottom of liquid cloud layer	Mak1994
 ptlc	= .4###		# pressure @ top of liquid cloud layer		Mak1994: 0.4
-ptic	= .6		# pressure @ top of ice cloud layer		    Flacké
+ptic	= .6		# pressure @ top of ice cloud layer		Flacké
 ptsf	= .9		# pressure @ top of surface flux layer		Mak1998: 0.85	
 ptbl	= .85		# pressure @ top of mixed boundary layer/
                     # level of stratification discontinuity		Mak1998: 0.8
-ptdl	= .89		# pressure @ top of drag layer			    Flacké
-pt	    = .0###		# pressure @ top of domain			        Mak1994: 0.15 or Mak1998: 0
-ptrop	= .25 		# pressure @ tropopause				        Flacké
+ptdl	= .89		# pressure @ top of drag layer			Flacké
+pt	= .0		# pressure @ top of domain			Mak1994: 0.15 or Mak1998: 0
+ptrop	= .25 		# pressure @ tropopause				Flacké
 
 nrws	= 201   			# vertical resolution (number of grid points)
-dp	    = (pt-ps)/(nrws-1)	# vertical resolution (constant increment)
-					        # NOTE: be careful with derivatives when defining dp negative
+dp	= (pt-ps)/(nrws-1)		# vertical resolution (constant increment)
+					# NOTE: be careful with derivatives when defining dp negative
 p	= np.linspace(pt, ps, nrws)	# pressure vector
-p	= np.append(p,p)		    # pressure vector repeated for calculations in model core
+p	= np.append(p,p)		# pressure vector repeated for calculations in model core
 
 jtml	= int((pt-ptml)/dp)		# ptml entry			Mak1994
 jblc	= int((pt-pblc)/dp)		# pblc entry			Mak1994
@@ -134,7 +127,7 @@ jtic	= int((pt-ptic)/dp)		# ptic entry			Flacké
 jtsf	= int((pt-ptsf)/dp)		# ptsf entry			Mak1998
 jtbl	= int((pt-ptbl)/dp)		# ptbl entry			Mak1998
 jtdl	= int((pt-ptdl)/dp)		# ptdl entry			Flacké
-jtrop	= int((pt-ptrop)/dp)	# ptrop entry			Flacké
+jtrop	= int((pt-ptrop)/dp)		# ptrop entry			Flacké
 
 # testing if pressure levels are too close
 if disc_strat_2 == True:
@@ -1091,5 +1084,4 @@ def show_vertical_profiles():
     ax4.legend(ncol=5,bbox_to_anchor=(1.02, -.4),loc='center',fontsize=17.5, handletextpad=.5, columnspacing=1)
 
     plt.savefig(f'/home/kfl078/Downloads/smoothprofiles.pdf', transparent=True, bbox_inches='tight', pad_inches=0.1)
-
 
