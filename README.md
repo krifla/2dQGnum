@@ -1,8 +1,8 @@
 # 2dQGnum
 
--------------------------------------------------
-Two-dimensional quasi-geostrophic numerical model
--------------------------------------------------
+---------------------------------------
+Moist Eady model including a tropopause
+---------------------------------------
 
 Author: 	Kristine Flacké Haualand (with some input from Vicky Meulenberg)
 
