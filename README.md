@@ -11,7 +11,7 @@ Year: 		2015
 Location: 	Geophysical Institute, University of Bergen, Bergen, Norway
 
 
-For questions/suggestions/feedback: Kristine.Haualand@uib.no
+For questions/suggestions/feedback: Kristine.Flacke.Haualand@hvl.no
 
 -----------
 Description
